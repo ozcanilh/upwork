@@ -7,6 +7,10 @@ require_relative '../support/WebDriver'
 $args = ARGV.dup # A global variable for browser
 class UpworkTest < WebDriver #Inheritance
 
+  def initialize(driver)
+    @driver = driver
+  end
+
   def setup
     visitpage($args[0])
     @search_result = SearchResultPage.new(@driver)
@@ -35,24 +39,23 @@ class UpworkTest < WebDriver #Inheritance
   def check_keyword_in_attributes
     @profile.check_keyword_in_attributes(@keyword)
   end
-end
 
-def teardown
-  @driver = Selenium::WebDriver.for :$args[0]
-  @driver.close # It closes the the browser window on which the focus is set.
-  @driver.quit # It basically calls driver.dispose method which in turn closes all the browser windows and ends the WebDriver session gracefully.
+  def teardown
+    puts "Driver close then quit."
+    @driver.close # It closes the the browser window on which the focus is set.
+    @driver.quit # It basically calls driver.dispose method which in turn closes all the browser windows and ends the WebDriver session gracefully.
+  end
 end
 
 @upworktest = UpworkTest.new(@driver)
-@webdriver = WebDriver.new(@driver)
 def run
   @upworktest.setup
   yield
-  teardown
+  @upworktest.teardown
 end
 
 run {
-  @upworktest.search_keyword # Step 5
+  @upworktest.search_keyword # Step 4 and 5
   @upworktest.check_profile_result_contains_keyword # Step 6 and 7
   @upworktest.click_profile # Step 8
   @upworktest.profile_attributes_to_stored_structure # Step 10

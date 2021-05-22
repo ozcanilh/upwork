@@ -44,10 +44,6 @@ class BasePage
     true
   end
 
-  def click_on(how, what)
-    driver.find_element(how, what).click
-  end
-
   def is_displayed?(locator)
     driver.find_element(locator).displayed?
     true
@@ -61,10 +57,6 @@ class BasePage
 
   def type(locator, keyword)
     driver.find_element(locator).send_keys keyword
-  end
-
-  def verify_page(title)
-    driver.title.include?(title).should == true
   end
 
 end
