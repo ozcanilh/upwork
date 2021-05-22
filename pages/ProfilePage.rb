@@ -54,7 +54,7 @@ class ProfilePage < BasePage #Inheritance
 
   # Check whether at least one attribute contains <keyword> / Step 11
   def check_keyword_in_attributes(keyword)
-    @profile_attributes.any? { |n| n.include? keyword } ? ( puts "At least one attribute (name, title, skills, overview)" +
+    @profile_attributes.any? { |n| n.include? keyword } ? ( puts "At least one attribute (name, title, skills, overview) " +
     "contain " + keyword + " keyword") : (puts "At least one attribute (name, title, skills, overview) is not contain  "
     + keyword + " keyword")
   end

@@ -15,11 +15,15 @@ class NavBar < BasePage
     @driver = driver
   end
 
-  # Search keyword which is defined in TestCase class / Step 5
+  # Search keyword which is defined in TestCase class / Step 4-5
   def search_keyword(keyword)
+    puts "Click search input."
     click_when_element_found(SEARCH_INPUT)
+    puts "Type " + keyword + " keyword in search input."
     type(SEARCH_INPUT, keyword)
+    puts "Find 'Hire professionals and agencies'."
     wait_for(SEARCH_OPTION_FREELANCERS, 5)
+    puts "Click on the magnifying glass button."
     click_when_element_found(SEARCH_BUTTON)
   end
 end

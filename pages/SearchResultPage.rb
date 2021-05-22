@@ -6,7 +6,7 @@ class SearchResultPage < BasePage
   # Page Objects
   ALERT_FIELD = { css: 'div[role=\'alert\']' }
   PROFILE_CARD = { class: 'up-card-section' }
-  FIRST_PROFILE_CARD = { css: 'div.up-card-section:nth-child(2)' }
+  FIRST_PROFILE_TITLE = { css: 'p[class=\'my-0 freelancer-title\']' }
 
   # the specific ways to grant access / Create the getter the easy way
   # Accessors are a way to create getter and setter methods without explicitly
@@ -21,7 +21,7 @@ class SearchResultPage < BasePage
     @@hash_result_arr = []
     wait_for(PROFILE_CARD, 5)
     count = size(PROFILE_CARD)
-    STDOUT.puts(count.to_s + ' profile is available in 1st result profile page for keyword:' +
+    puts(count.to_s + ' profile is available in 1st result profile page for keyword:' +
                   keyword + '. These are listed below: ')
 
     (2..count + 1).each { |element|
@@ -38,6 +38,7 @@ class SearchResultPage < BasePage
       @@hash_result_arr << hash # it can be also .push(hash)
     }
     puts @@hash_result_arr
+    puts
   end
 
   # The longer equivalent of attr_reader / Implicitly returned / "Getter" to return instance variable
@@ -47,6 +48,7 @@ class SearchResultPage < BasePage
 
   # Check profile attributes includes searched keyword or not / Step 7
   def check_profile_results_contains_keyword(keyword)
+    puts "Checking profile attributes includes searched keyword or not"
     @@hash_result_arr.each do |hash|
       puts "Profile: " + hash["name"].to_s
       hash.each do |key,value|
@@ -60,6 +62,7 @@ class SearchResultPage < BasePage
 
   # Click profile when profile card is loaded / Step 8
   def click_profile
-    click_when_element_found(FIRST_PROFILE_CARD)
+    puts "Click on freelancers title."
+    click_when_element_found(FIRST_PROFILE_TITLE)
   end
 end
