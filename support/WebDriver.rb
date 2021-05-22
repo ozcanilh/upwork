@@ -1,4 +1,6 @@
 require 'selenium-webdriver'
+require 'webdrivers/chromedriver'
+require 'webdrivers/geckodriver'
 
 class WebDriver
 
@@ -24,33 +26,13 @@ class WebDriver
   end
 
   def start_browser(browser)
-
-    if Selenium::WebDriver::Platform.linux?
-      driverChrome = "chromedriverLinux"
-      driverFirefox = "geckodriverLinux.exe"
-    elsif Selenium::WebDriver::Platform.mac?
-      driverChrome = "chromedriverMac"
-      driverFirefox = "geckodriverMac.exe"
-    elsif Selenium::WebDriver::Platform.windows?
-      driverChrome = "chromedriverWin.exe"
-      driverFirefox = "geckodriverWin.exe"
-    else
-        raise NotImplementedError, 'Your OS is not supported by webdrivers gem.'
-    end
-
     case browser
     when 'firefox'
-      geckodriver_path = File.join(File.absolute_path('../..', File.dirname(__FILE__)),
-                                   "upwork/drivers", driverFirefox)
-      Selenium::WebDriver::Chrome::Service.driver_path=geckodriver_path
       @driver = Selenium::WebDriver.for :firefox
       @driver.manage.window.maximize
       @driver.manage.delete_all_cookies
       puts "Firefox is started without cookies."
     when 'chrome'
-      chromedriver_path = File.join(File.absolute_path('../..', File.dirname(__FILE__)),
-                                    "upwork/drivers", driverChrome)
-      Selenium::WebDriver::Chrome::Service.driver_path=chromedriver_path
       @driver = Selenium::WebDriver.for :chrome
       @driver.manage.window.maximize
       @driver.manage.delete_all_cookies

@@ -18,8 +18,6 @@ class ProfilePage < BasePage #Inheritance
 
   # Compare profile attributes to stored structure (hash_array in Search Result Page) / Step 10
   def profile_attributes_to_stored_structure
-    @search_result_page = SearchResultPage.new(@driver)
-
 =begin
     wait_for(PROFILE_TITLE, 10) #It should be worked but not handled it, for this reason sleep is used
 =end
@@ -40,6 +38,7 @@ class ProfilePage < BasePage #Inheritance
     @profile_attributes.push(skills)
     @profile_attributes.push(overview)
 
+    @search_result_page = SearchResultPage.new(@driver)
     attribute_results = @search_result_page.get_hash_array.find { |h|
       h["name"] == name &&
       h["title"] == title &&

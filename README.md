@@ -7,6 +7,9 @@ source 'http://rubygems.org'
 
 * gem 'selenium-webdriver'
 
+FFI is a required pre-requisite for Windows
+* gem 'ffi'
+
 Run the below code to install gems for our testing.
 * bundle install
 
@@ -17,6 +20,7 @@ Framework is created using pageobject model below is the folder structure
 * support: utilities and base driver initialization files are added to this folder
 * pages: each file in this folder represents a page/section on web application and has all the elements and actions related to the page
 * test: test cases are available in folder 
+* drivers: added different drivers (x64) for different OS for Firefox and Chrome.
 
 ## Running tests
 
@@ -47,6 +51,6 @@ Example:
 
 
 * After downloaded driver, you have to specify driver path like
-  Selenium::WebDriver::Chrome::Service.driver_path="//chrome/chromedriver.exe"
-  Selenium::WebDriver::Chrome::Service.driver_path="//firefox/geckodriver.exe"
+  Selenium::WebDriver::Chrome::Service.driver_path="//drivers/chromedriver.exe"
+  Selenium::WebDriver::Chrome::Service.driver_path="//drivers/geckodriver.exe"
  

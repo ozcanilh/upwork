@@ -1,6 +1,5 @@
 require 'selenium-webdriver'
 require_relative '../support/BasePage'
-require_relative '../pages/ProfilePage'
 
 class SearchResultPage < BasePage
   # Page Objects
